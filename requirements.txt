@@ -1,0 +1,4 @@
+asyncio
+flask_socketio
+flask_cors
+simple-websocket
