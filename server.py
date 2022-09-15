@@ -1,6 +1,5 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO, emit, send
-from flask_cors import CORS, cross_origin
+from flask import Flask
+from flask_socketio import SocketIO, emit
 from faker import Faker
 fake = Faker()
 
