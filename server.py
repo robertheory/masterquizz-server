@@ -57,12 +57,14 @@ class Game:
         self.finishedRounds = []
         self.finished = False
         self.users = []
+        self.next_round_confirmation = []
 
-    def user_exists(self, userId):
-        for i in range(len(self.users)):
-            if self.users[i]['id'] == userId:
-                return True
-        return False
+    def user_exists(self, user_id):
+        user_ids = map(lambda user: user['id'], self.users)
+        if (user_id in list(user_ids)):
+            return True
+        else:
+            return False
 
     def user_already_answered(self, id):
         for i in range(len(self.currentRound.answers)):
@@ -85,10 +87,10 @@ class Game:
     def show_round_results(self):
         self.currentRound.open = False
         response = {
-            "round": game.currentRound.question,
-            "question": questions[game.currentRound.question]['question'],
-            "correctAnswer": questions[game.currentRound.question]['answer'],
-            "answers": game.currentRound.answers
+            "round": self.currentRound.question,
+            "question": questions[self.currentRound.question]['question'],
+            "correctAnswer": questions[self.currentRound.question]['answer'],
+            "answers": self.currentRound.answers
         }
         print(response)
         emit('round-result', response, broadcast=True)
@@ -102,20 +104,54 @@ class Game:
                 self.show_round_results()
 
     def register_user(self, user):
-        exits = self.user_exists(userId=user["id"])
+        exits = self.user_exists(user["id"])
+        emit('client-list', game.users, broadcast=True)
+        print("Exists", exits)
+        print("USER ", user)
+        print("USERS ", len(self.users))
+
         if (not exits):
             self.users.append(user)
+
+        if (bool(self.currentRound)):
+            print('** HAS A ROUND **')
             if (self.currentRound.open):
                 response = {
-                    "question": questions[game.currentRound.question]['question'],
-                    "options": questions[game.currentRound.question]['options']
+                    "question": questions[self.currentRound.question]['question'],
+                    "options": questions[self.currentRound.question]['options']
                 }
                 print('** JOIN ROUND **')
                 emit('begin-round', response)
+            else:
+                print('** SHOW RESULTS **')
+                response = {
+                    "round": self.currentRound.question,
+                    "question": questions[self.currentRound.question]['question'],
+                    "correctAnswer": questions[self.currentRound.question]['answer'],
+                    "answers": self.currentRound.answers
+                }
+                emit('round-result', response)
 
     def finish_game(self):
+        print('** GAME FINISHED **')
         self.finished = True
         self.currentRound = None
+
+    def all_users_want_to_continue(self):
+        not_confirmed_users = filter(
+            lambda user: user['id'] not in self.next_round_confirmation, self.users)
+
+        if (len(list(not_confirmed_users)) == 0):
+            return True
+        else:
+            return False
+
+    def handle_continue(self, userId):
+        self.next_round_confirmation.append(userId)
+
+        if (self.all_users_want_to_continue()):
+            self.next_round()
+            self.next_round_confirmation = []
 
     def next_round(self):
         print(self.currentRound)
@@ -142,24 +178,37 @@ game = Game()
 
 
 @socketio.on('connect')
-def on_join(auth):
+def on_connect(auth):
+    global game
     newClient = auth['user']
     print('** NEW CONNECTION **')
     game.register_user(newClient)
-    emit('client-list', game.users, broadcast=True)
 
 
 @socketio.on('start-game')
 def handle_start_game():
+    global game
     print('** NEW GAME **')
+    old_users = game.users
+    game = Game()
+    game.users = old_users
     game.next_round()
 
 
 @socketio.on('answer')
 def handle_answer(data):
+    global game
     print('** NEW ANSWER **')
     print(data)
     game.new_answer(data)
+
+
+@socketio.on('continue')
+def handle_continue(data):
+    global game
+    print('** CONTINUE **')
+    print(data)
+    game.handle_continue(data['id'])
 
 
 @socketio.on('disconnect')
