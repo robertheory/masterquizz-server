@@ -86,7 +86,7 @@ def handle_start_game():
     print('** NEW GAME **')
     currentRound = Round(questions[0]['index'])
     response = {
-        "question": currentRound.question,
+        "question": questions[currentRound.question]['question'],
         "options": questions[currentRound.question]['options']
     }
     emit('begin-round', response, broadcast=True)
