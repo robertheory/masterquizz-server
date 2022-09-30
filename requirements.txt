@@ -1,4 +1,3 @@
 asyncio
 flask_socketio
 simple-websocket
-Faker

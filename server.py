@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_socketio import SocketIO, emit
-from faker import Faker
-fake = Faker()
+import os
 
 app = Flask(__name__)
 
@@ -227,4 +226,6 @@ def disconnect():
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    PORT = os.environ.get('PORT', 3333)
+    socketio.run(app, allow_unsafe_werkzeug=True,
+                 host='0.0.0.0', port=PORT, debug=True)
