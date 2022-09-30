@@ -73,13 +73,13 @@ class Game:
         return False
 
     def all_users_answered(self):
-        answer_user_ids = map(
-            lambda answer: answer['user'], self.currentRound.answers)
+        answer_user_ids = list(map(
+            lambda answer: answer['user'], self.currentRound.answers))
 
-        not_answered_users = filter(
-            lambda user: user['id'] not in answer_user_ids, self.users)
+        not_answered_users = list(filter(
+            lambda user: user['id'] not in answer_user_ids, self.users))
 
-        if (len(list(not_answered_users)) == 0):
+        if (len(not_answered_users) == 0):
             return True
         else:
             return False
@@ -134,6 +134,17 @@ class Game:
 
     def finish_game(self):
         print('** GAME FINISHED **')
+
+        response = list(map(lambda round: ({
+            "round": round.question,
+            "question": questions[round.question]['question'],
+            "correctAnswer": questions[round.question]['answer'],
+            "answers": round.answers,
+        }), self.finishedRounds))
+
+        print(response)
+        emit('game-result', response, broadcast=True)
+
         self.finished = True
         self.currentRound = None
 
@@ -154,7 +165,6 @@ class Game:
             self.next_round_confirmation = []
 
     def next_round(self):
-        print(self.currentRound)
         if (self.currentRound == None):
             newQuestion = 0
         else:
