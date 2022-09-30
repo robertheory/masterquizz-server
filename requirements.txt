@@ -1,3 +1,4 @@
 asyncio
 flask_socketio
 simple-websocket
+flask_cors
