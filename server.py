@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 socketio = SocketIO(app, logger=False, engineio_logger=False,
-                    cors_allowed_origins="*")
+                    cors_allowed_origins=[])
 
 questions = [
     {

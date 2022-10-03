@@ -1,1 +1,1 @@
-server: python3 server.py
+server: python server.py
