@@ -1,0 +1,122 @@
+[
+  {
+    "index": 0,
+    "question": "Normalmente, quantos litros de sangue uma pessoa tem? Em média, quantos são retirados numa doação de sangue?",
+    "answer": "b",
+    "options": {
+      "a": "Tem entre 2 a 4 litros. São retirados 450 mililitros",
+      "b": "Tem entre 4 a 6 litros. São retirados 450 mililitros",
+      "c": "Tem 10 litros. São retirados 2 litros",
+      "d": "Tem 7 litros. São retirados 1,5 litros",
+      "e": "Tem 0,5 litros. São retirados 0,5 litros"
+    }
+  },
+  {
+    "index": 1,
+    "question": "De quem é a famosa frase “Penso, logo existo”?",
+    "answer": "c",
+    "options": {
+      "a": "Platão",
+      "b": "Galileu Galilei",
+      "c": "Descartes",
+      "d": "Sócrates",
+      "e": "Francis Bacon"
+    }
+  },
+  {
+    "index": 2,
+    "question": "De onde é a invenção do chuveiro elétrico?",
+    "answer": "c",
+    "options": {
+      "a": "França",
+      "b": "Inglaterra",
+      "c": "Brasil",
+      "d": "Austrália",
+      "e": "Itália"
+    }
+  },
+  {
+    "index": 3,
+    "question": "Quais o menor e o maior país do mundo?",
+    "answer": "a",
+    "options": {
+      "a": "Vaticano e Rússia",
+      "b": "Nauru e China",
+      "c": "Mônaco e Canadá",
+      "d": "Malta e Estados Unidos",
+      "e": "São Marino e Índia"
+    }
+  },
+  {
+    "index": 4,
+    "question": "Qual o nome do presidente do Brasil que ficou conhecido como Jango?",
+    "answer": "e",
+    "options": {
+      "a": "Jânio Quadros",
+      "b": "Jacinto Anjos",
+      "c": "Getúlio Vargas",
+      "d": "João Figueiredo",
+      "e": "João Goulart"
+    }
+  },
+  {
+    "index": 5,
+    "question": "Qual o grupo em que todas as palavras foram escritas corretamente?",
+    "answer": "b",
+    "options": {
+      "a": "Asterístico, beneficiente, meteorologia, entertido",
+      "b": "Asterisco, beneficente, meteorologia, entretido",
+      "c": "Asterisco, beneficente, metereologia, entretido",
+      "d": "Asterístico, beneficiente, metereologia, entretido",
+      "e": "Asterisco, beneficiente, metereologia, entretido"
+    }
+  },
+  {
+    "index": 6,
+    "question": "Qual o livro mais vendido no mundo a seguir à Bíblia?",
+    "answer": "b",
+    "options": {
+      "a": "O Senhor dos Anéis",
+      "b": "Dom Quixote",
+      "c": "O Pequeno Príncipe",
+      "d": "Ela, a Feiticeira",
+      "e": "Um Conto de Duas Cidades"
+    }
+  },
+  {
+    "index": 7,
+    "question": "Quantas casas decimais tem o número pi?",
+    "answer": "c",
+    "options": {
+      "a": "Duas",
+      "b": "Centenas",
+      "c": "Infinitas",
+      "d": "Vinte",
+      "e": "Milhares"
+    }
+  },
+  {
+    "index": 8,
+    "question": "Atualmente, quantos elementos químicos a tabela periódica possui?",
+    "answer": "d",
+    "options": {
+      "a": "113",
+      "b": "109",
+      "c": "108",
+      "d": "118",
+      "e": "92"
+    }
+  },
+  {
+    "index": 9,
+    "question": "Quais os países que têm a maior e a menor expectativa de vida do mundo?",
+    "answer": "a",
+    "options": {
+      "a": "Japão e Serra Leoa",
+      "b": "Austrália e Afeganistão",
+      "c": "Itália e Chade",
+      "d": "Brasil e Congo",
+      "e": "Estados Unidos e Angola"
+    }
+  }
+]

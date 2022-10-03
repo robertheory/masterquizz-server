@@ -1,40 +1,15 @@
 from flask import Flask
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
-import os
+import json
 
 app = Flask(__name__)
 CORS(app)
 
-socketio = SocketIO(app, logger=False, engineio_logger=False,
-                    cors_allowed_origins=[])
+socketio = SocketIO(app, cors_allowed_origins=[])
 
-questions = [
-    {
-        "index": 0,
-        "question": "Quanto é 2 + 2?",
-        "answer": "a",
-        "options": {
-            "a": "é 6",
-            "b": "é 2",
-            "c": "é 3",
-            "d": "é 4",
-            "e": "é 9"
-        }
-    },
-    {
-        "index": 1,
-        "question": "Quanto é 1 + 1?",
-        "answer": "a",
-        "options": {
-            "a": "é 1",
-            "b": "é 3",
-            "c": "é 5",
-            "d": "é 6",
-            "e": "é 2"
-        }
-    }
-]
+with open('questions.json') as file:
+    questions = json.load(file)
 
 
 class Round:
@@ -227,6 +202,5 @@ def disconnect():
 
 
 if __name__ == '__main__':
-    PORT = os.environ.get('PORT', 3333)
     socketio.run(app, allow_unsafe_werkzeug=True,
-                 host='0.0.0.0', port=PORT, debug=True)
+                 host='0.0.0.0', port=5000, debug=True)

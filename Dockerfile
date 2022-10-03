@@ -14,6 +14,6 @@ RUN apt-get update
 
 COPY . .
 
-EXPOSE 3333
+EXPOSE 5000
 
 CMD [ "python", "server.py" ]
