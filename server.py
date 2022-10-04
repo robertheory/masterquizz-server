@@ -160,7 +160,7 @@ class Game:
                 "options": questions[self.currentRound.question]['options']
             }
             emit('begin-round', response, broadcast=True)
-            time.sleep(10)
+            time.sleep(20)
             if (self.currentRound.question == newQuestion):
                 self.show_round_results()
 
