@@ -2,6 +2,7 @@ from flask import Flask
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
 import json
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -69,6 +70,8 @@ class Game:
         }
         print(response)
         emit('round-result', response, broadcast=True)
+        time.sleep(20)
+        self.next_round()
 
     def new_answer(self, data):
         if (not self.user_already_answered(data['user'])):
@@ -155,6 +158,8 @@ class Game:
                 "options": questions[self.currentRound.question]['options']
             }
             emit('begin-round', response, broadcast=True)
+            time.sleep(30)
+            self.show_round_results()
         else:
             self.finish_game()
 
