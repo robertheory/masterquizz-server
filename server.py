@@ -183,9 +183,7 @@ def on_connect(auth):
 def handle_start_game():
     global game
     print('** NEW GAME **')
-    old_users = game.users
     game = Game()
-    game.users = old_users
     game.next_round()
 
 
